@@ -57,6 +57,11 @@ strong, .font-weight-bold {
 	background-position-y: -0.15ex;
 }
 
+.underline-blue-dark-small {
+    background-image: linear-gradient(to top, #DA3248 0.5ex, hsla(0, 0%, 0%, 0) 0.5ex);
+	background-position-y: -0.15ex;
+}
+
 .tab-section {
 	max-width: 1100px;
 	padding-bottom: 3em;
