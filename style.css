@@ -61,6 +61,12 @@ strong, .font-weight-bold {
 	max-width: 1100px;
 	padding-bottom: 3em;
 	margin: 0 auto;
+	padding-left: env(safe-area-inset-left);
+	padding-right: env(safe-area-inset-left);
+}
+
+.tab-section:last-child {
+	padding-bottom: env(safe-area-inset-bottom);;
 }
 
 .tab-content {
