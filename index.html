@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Can Andrew Yang Win? Does Andrew Yang Have a Shot?">
+  	<meta name="keywords" content="Andrew Yang, 2020, Democratic, Presidential, Win, Primary">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Can Andrew Yang Really Win?</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<main class="hero">
+		<h1>Can Andrew Yang Win?</h1>
+		<span class="the-answer underline-blue-dark">Yes</span>
+	</main>
+	<main>
+		<div class="tab-container">
+			<div class="tab-buttons">
+				<ul class="tabs">
+						<li class="active"><a href="#" onclick="return">Beating Trump</a></li>
+						<li><a href="#" onclick="return">Winning the Democratic Nomination</a></li>
+				</ul>
+			</div>
+			<hr>
+			<div class="tab-content">
+				<div class="tab-section active">
+					<p><span class="font-weight-bold">Out of all the democratic candidates, Andrew Yang has the best chance to beat Donald Trump.</span></p>
+
+					<p>The graph below comparing the different candidates' odds is generated from betting market odds.</p>
+					<p>Why use betting markets over polls?
+						<ol>
+							<li>Betting markets generally perform better than polls, especially earlier in the election cycle.</li>
+							<li>During the primaries, not all candidates are polled against the opposing party's incumbent candidate. If we were to use polls to determine ability to beat trump, there would be very little data on many of the candidates.</li>
+						</ol>
+						<p>If you'd like to know more, you can check out this <a href="http://researchdmr.com/RothschildPOQ2009.pdf">research paper</a> that compares prediction markets with polls.</p>
+					<img class="probability-graph" src="media/probability-beating-trump.png" alt="">
+				</div>
+				<div class="tab-section">
+						<p><span class="font-weight-bold">"Andrew Yang is polling at 2-3%. He couldn't possibly win." Or could he?</span></p>
+						<p>Stranger things have happened. Let's look at some polling history, shall we?</p>
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">1976 Election: Democratic Primaries</h5>
+								<h6 class="card-subtitle mb-2 text-muted">Data from <a href="https://fivethirtyeight.com/features/what-more-than-40-years-of-early-primary-polls-tell-us-about-2020-part-1/">fivethirtyeight.com</a></h6>
+								<p class="card-text">In the 1st half of 1975, Jimmy Carter was in <span class="font-weight-bold">16th place out of 18 candidates</span>. His polling number? A whopping <span class="font-weight-bold">0.8%</span></p>
+								<p class="card-text">In the 2nd half of 1975, Jimmy Carter moved up to <span class="font-weight-bold">13th place.. out of 13</span> remaining candidates. <br> Oh, and his polling number had actually <span class="font-weight-bold underline-blue-dark">dropped to 0.5%</span></p>
+								<p class="card-text">In 1976, Jimmy Carter won the primary with 40% of the vote</p>
+							</div>
+						</div>
+
+						<br>
+
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">1992 Election: Democratic Primaries</h5>
+								<h6 class="card-subtitle mb-2 text-muted">Data from <a href="https://fivethirtyeight.com/features/what-more-than-40-years-of-early-primary-polls-tell-us-about-2020-part-1/">fivethirtyeight.com</a></h6>
+								<p>In the 1st half of 1991, Bill Clinton was tied for <span class="font-weight-bold">11th place out of 18 candidates</span>. He polled at <span class="font-weight-bold">1.3%</span></p>
+								<p>In the 2nd half of 1991, Bill Clinton's polling improved dramatically to <span class="font-weight-bold">7.4%</span>, putting him in <span class="font-weight-bold">4th place</span></p>
+							</div>
+						</div>
+
+						<br>
+
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">1992 Election: Democratic Primaries</h5>
+								<h6 class="card-subtitle mb-2 text-muted">Data from <a href="https://www.realclearpolitics.com/epolls/2016/president/us/2016_republican_presidential_nomination-3823.html">realclearpolitics.com</a></h6>
+								<p>July 11, 2015, Donald Trump was in <span class="font-weight-bold">7th place</span> in the Republican primaries, polling at 6.5%</p>
+								<p><span class="font-weight-bold underline-blue-dark">In just a week, Trump leapt into 1st place</span></p>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</main>
+
+	<footer></footer>
+</body>
+<script>
+	let addClass = (e, clazz) => {
+		let classes = e.className.split(" ");
+		if (classes.indexOf(clazz) == -1) {
+			e.className += " " + clazz;
+		}
+	}
+	let removeClass = (e, clazz) => {
+		let regex = new RegExp(`\b${clazz}\b`, 'g');
+		e.className.replace(regex, "");
+	}
+	let setTabAsActive = (e) => {
+		let tab = e.target.closest('li');
+		let tabs = [...tab.parentElement.children];
+		let tabIndex = tabs.indexOf(tab);
+		let tabSections = [...tab.closest('.tab-container').getElementsByClassName('tab-section')];
+
+		tabs.forEach((tab, index) => {
+			if(index == tabIndex){
+				console.log(tab)
+				tab.classList.add('active');
+				addClass(tab, 'active');
+			} else {
+				tab.classList.remove('active');
+				removeClass(tab, 'active');
+			}
+		});
+
+		tabSections.forEach((tabSection, index) => {
+			if(index == tabIndex){
+				tabSection.classList.add('active');
+				addClass(tabSection, 'active');
+			} else {
+				tabSection.classList.remove('active');
+				removeClass(tabSection, 'active');
+			}
+		});
+	}
+	[...document.getElementsByClassName('tab-container')].flatMap(tabContainer=>{
+		let tabs = [...tabContainer.getElementsByClassName('tab-buttons')].flatMap(tabButtons=>[...tabButtons.getElementsByTagName('li')])
+		tabs.forEach(tab=>{
+			tab.onclick = setTabAsActive;
+		})
+	});
+</script>
+</html>
