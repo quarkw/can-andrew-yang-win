@@ -99,6 +99,7 @@ p a:hover {
 
 .card a:hover {
 	color: #13294B!important;
+	text-decoration: none;
 }
 
 .card-title {
