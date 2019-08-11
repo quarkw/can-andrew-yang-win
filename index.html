@@ -124,8 +124,6 @@
 		})
 		window.addEventListener("scroll", () => {
 			let lowestSectionIndex = 0;
-			console.log(window.scrollY);
-			console.log(tabSections.map(tabSection=>tabSection.offsetTop));
 			tabSections.forEach( (tabSection, index) => {
 				if (window.scrollY + window.innerHeight/2 > tabSection.offsetTop) {
 					if( tabSection.offsetTop > tabSections[lowestSectionIndex].offsetTop) {
@@ -133,7 +131,6 @@
 					}
 				}
 			});
-			console.log(lowestSectionIndex);
 			setTabAsActive(tabs, tabSections, lowestSectionIndex);
 		});
 	});
