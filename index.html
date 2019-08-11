@@ -119,9 +119,6 @@
 		tabs.forEach((tab, index)=>{
 			tab.onclick = () => {setTabAsActive(tabs, tabSections, index)};
 		})
-		tabSections.sort((a, b) => {
-			a.offsetTop - b.offsetTop;
-		})
 		window.addEventListener("scroll", () => {
 			let lowestSectionIndex = 0;
 			tabSections.forEach( (tabSection, index) => {
