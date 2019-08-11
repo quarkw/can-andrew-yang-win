@@ -57,6 +57,10 @@ strong, .font-weight-bold {
     margin: 0 auto;
 }
 
+.tab-content {
+	padding: 0 1em;
+}
+
 ol, p {
 	text-align: left;
 }
@@ -114,7 +118,7 @@ ul.tabs {
 }
 
 ul.tabs li.active a {
-	background-image: linear-gradient(to top, #DA3248 0.75ex, hsla(0, 0%, 0%, 0) 0.75ex);
+	background-image: linear-gradient(to top, #DA3248 0.75ex, hsla(0, 0%, 0%, 0) 0.75ex)!important;
 	background-position-y: -0.15ex;
 }
 
