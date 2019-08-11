@@ -18,15 +18,15 @@
 	</main>
 	<main>
 		<div class="tab-container">
-			<div class="tab-buttons">
+			<div class="tab-buttons sticky-top">
 				<ul class="tabs">
-						<li class="active"><a href="#">Beating Trump</a></li>
-						<li><a href="#">Winning the Democratic Nomination</a></li>
+						<li class="active"><a href="#beating-trump">Beating Trump</a></li>
+						<li><a href="#winning-nomination">Winning the Democratic Nomination</a></li>
 				</ul>
+				<hr>
 			</div>
-			<hr>
 			<div class="tab-content">
-				<div class="tab-section active">
+				<div class="tab-section active" id="beating-trump">
 					<p><span class="font-weight-bold">Out of all the democratic candidates, Andrew Yang has the best chance to beat Donald Trump.</span></p>
 
 					<p>The graph below comparing the different candidates' odds is generated from betting market odds.</p>
@@ -38,7 +38,8 @@
 						<p>If you'd like to know more, you can check out this <a href="http://researchdmr.com/RothschildPOQ2009.pdf">research paper</a> that compares prediction markets with polls.</p>
 					<img class="probability-graph" src="media/probability-beating-trump.png" alt="">
 				</div>
-				<div class="tab-section">
+				<hr>
+				<div class="tab-section" id="winning-nomination">
 						<p><span class="font-weight-bold">"Andrew Yang is polling at 2-3%. He couldn't possibly win." Or could he?</span></p>
 						<p>Stranger things have happened. Let's look at some polling history, shall we?</p>
 						<div class="card">
@@ -90,15 +91,10 @@
 		let regex = new RegExp(`\b${clazz}\b`, 'g');
 		e.className.replace(regex, "");
 	}
-	let setTabAsActive = (e) => {
-		let tab = e.target.closest('li');
-		let tabs = [...tab.parentElement.children];
-		let tabIndex = tabs.indexOf(tab);
-		let tabSections = [...tab.closest('.tab-container').getElementsByClassName('tab-section')];
 
+	let setTabAsActive = (tabs, tabSections, tabIndex) => {
 		tabs.forEach((tab, index) => {
 			if(index == tabIndex){
-				console.log(tab)
 				tab.classList.add('active');
 				addClass(tab, 'active');
 			} else {
@@ -106,7 +102,6 @@
 				removeClass(tab, 'active');
 			}
 		});
-
 		tabSections.forEach((tabSection, index) => {
 			if(index == tabIndex){
 				tabSection.classList.add('active');
@@ -117,11 +112,30 @@
 			}
 		});
 	}
+
 	[...document.getElementsByClassName('tab-container')].flatMap(tabContainer=>{
 		let tabs = [...tabContainer.getElementsByClassName('tab-buttons')].flatMap(tabButtons=>[...tabButtons.getElementsByTagName('li')])
-		tabs.forEach(tab=>{
-			tab.onclick = setTabAsActive;
+		let tabSections = [...tabs[0].closest('.tab-container').getElementsByClassName('tab-section')];
+		tabs.forEach((tab, index)=>{
+			tab.onclick = () => {setTabAsActive(tabs, tabSections, index)};
 		})
+		tabSections.sort((a, b) => {
+			a.offsetTop - b.offsetTop;
+		})
+		window.addEventListener("scroll", () => {
+			let lowestSectionIndex = 0;
+			console.log(window.scrollY);
+			console.log(tabSections.map(tabSection=>tabSection.offsetTop));
+			tabSections.forEach( (tabSection, index) => {
+				if (window.scrollY + window.innerHeight/2 > tabSection.offsetTop) {
+					if( tabSection.offsetTop > tabSections[lowestSectionIndex].offsetTop) {
+						lowestSectionIndex = index;
+					}
+				}
+			});
+			console.log(lowestSectionIndex);
+			setTabAsActive(tabs, tabSections, lowestSectionIndex);
+		});
 	});
 </script>
 </html>

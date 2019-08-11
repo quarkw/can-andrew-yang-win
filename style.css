@@ -7,7 +7,7 @@ body {
 }
 
 main {
-	padding: 1em 0;
+	padding-bottom: 1em;
 }
 
 p {
@@ -40,6 +40,11 @@ strong, .font-weight-bold {
 	text-shadow: 4px 5px #DA3248;
 }
 
+.tab-buttons {
+	padding-top: 1em;
+	background-color: #043673;
+}
+
 .tab-buttons li {
 	float: left;
 	margin-left: 1em;
@@ -54,11 +59,16 @@ strong, .font-weight-bold {
 
 .tab-section {
 	max-width: 1100px;
-    margin: 0 auto;
+	padding-bottom: 3em;
+	margin: 0 auto;
 }
 
 .tab-content {
 	padding: 0 1em;
+}
+
+.tab-content hr {
+	max-width: 1100px;
 }
 
 ol, p {
@@ -105,8 +115,9 @@ ul.tabs {
     display: flex;
 }
 
-.tab-section {
-	display: none;
+.tab-section:not(:first-child) {
+	padding-top: 3em;
+	display: block;
 }
 
 .tab-section.active {
