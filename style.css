@@ -64,7 +64,7 @@ strong, .font-weight-bold {
 
 .tab-section {
 	max-width: 1100px;
-	padding-bottom: 3em;
+	padding-bottom: 1em;
 	margin: 0 auto;
 	padding-left: env(safe-area-inset-left);
 	padding-right: env(safe-area-inset-left);
@@ -127,8 +127,13 @@ ul.tabs {
     display: flex;
 }
 
+.tab-section:first-child {
+	padding-top: 1em;
+	display: block;
+}
+
 .tab-section:not(:first-child) {
-	padding-top: 3em;
+	padding-top: 1em;
 	display: block;
 }
 
@@ -163,5 +168,6 @@ ul.tabs li a:hover {
 }
 
 hr {
-	background-color: #fff
+	background-color: #fff;
+	margin: 0 auto;
 }
