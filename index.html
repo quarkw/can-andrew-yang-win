@@ -112,7 +112,7 @@
 		}
 	}
 	let removeClass = (e, clazz) => {
-		let regex = new RegExp(`\b${clazz}\b`, 'g');
+		let regex = new RegExp(`\\b${clazz}\\b`, 'g');
 		e.className.replace(regex, "");
 	}
 
@@ -140,9 +140,9 @@
 	[...document.getElementsByClassName('tab-container')].flatMap(tabContainer=>{
 		let tabs = [...tabContainer.getElementsByClassName('tab-buttons')].flatMap(tabButtons=>[...tabButtons.getElementsByTagName('li')])
 		let tabSections = [...tabs[0].closest('.tab-container').getElementsByClassName('tab-section')];
-		tabs.forEach((tab, index)=>{
+		/* tabs.forEach((tab, index)=>{
 			tab.onclick = () => {setTabAsActive(tabs, tabSections, index)};
-		})
+		}) */
 		window.addEventListener("scroll", () => {
 			let lowestSectionIndex = 0;
 			tabSections.forEach( (tabSection, index) => {
