@@ -166,6 +166,12 @@
 		tabSections.forEach((tabSection, index) => {
 			if(index == tabIndex){
 				tabSection.classList.add('active');
+				let hash = `#${window.scrollY < 50 ? '' : tabSection.previousElementSibling.id}`;
+				if(history.replaceState) {
+					history.replaceState(null, null, hash);
+				} else {
+					location.hash = hash;
+				}
 				addClass(tabSection, 'active');
 			} else {
 				tabSection.classList.remove('active');
