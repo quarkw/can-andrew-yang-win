@@ -37,7 +37,7 @@
 				<hr>
 			</div>
 			<div class="tab-content">
-				<div class="tab-section active" id="beating-trump">
+				<div data-scroll class="tab-section active" id="beating-trump">
 					<img class="probability-graph" src="media/probability-beating-trump.png" alt="">
 					<br>
 					<br>
@@ -53,7 +53,7 @@
 
 				</div>
 				<hr>
-				<div class="tab-section" id="winning-nomination">
+				<div data-scrollss class="tab-section" id="winning-nomination">
 						<p><span class="font-weight-bold">"Andrew Yang is polling at 2-3%. He couldn't possibly win the democratic primary." Or could he?</span></p>
 						<p>Stranger things have happened. Let's look at some polling history (Keep in mind, Andrew Yang is tied for 5th in some qualifying polls):</p>
 						<div class="card">
@@ -212,8 +212,8 @@
 		setTimeout(adjustShareButtonSize, 250);
 	});
 </script>
-<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0/dist/smooth-scroll.polyfills.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@16.1/dist/smooth-scroll.polyfills.min.js"></script>
 <script>
-	let scroll = new SmoothScroll('a[href*="#"]');
+	let scroll = new SmoothScroll('a[href*="#"]', { topOnEmptyHash: true, offset: 60 });
 </script>
 </html>
