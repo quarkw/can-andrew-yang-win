@@ -148,6 +148,7 @@ ul.tabs {
 ul.tabs li.active a {
 	background-image: linear-gradient(to top, #DA3248 0.75ex, hsla(0, 0%, 0%, 0) 0.75ex)!important;
 	background-position-y: -0.15ex;
+	text-decoration: none;
 }
 
 ul.tabs li a {
@@ -166,6 +167,17 @@ ul.tabs li a:hover {
 	background-position-y: -0.15ex;
 	text-decoration: none;
 }
+@media (hover: none) {
+	ul.tabs li a {
+		background-image: none !important;
+		text-decoration: underline;
+	}
+	ul.tabs li.active a {
+		background-image: linear-gradient(to top, #DA3248 0.75ex, hsla(0, 0%, 0%, 0) 0.75ex)!important;
+		background-position-y: -0.15ex;
+		text-decoration: none;
+	}
+ }
 
 hr {
 	background-color: #fff;
@@ -372,7 +384,7 @@ background-color: #FF6600
   border-color: #8c0615;
 }
 
-.anchor-60 {
+.anchor {
 	position: relative;
 	top: -60px;
 }

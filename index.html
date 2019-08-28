@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div id="fb-root"></div>
-	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0"></script>	<main class="hero">
+	<main class="hero">
 		<h1>Can Andrew Yang Win?</h1>
 		<span class="the-answer underline-blue-dark">Yes</span>
 	</main>
@@ -37,7 +37,7 @@
 				<hr>
 			</div>
 			<div class="tab-content">
-				<div class="anchor-60" id="beating-trump"></div>
+				<div class="anchor" id="beating-trump"></div>
 				<div data-scroll class="tab-section active">
 					<img class="probability-graph" src="media/probability-beating-trump.png" alt="">
 					<br>
@@ -54,8 +54,8 @@
 
 				</div>
 				<hr>
-				<div class="anchor-60" id="winning-nomination"></div>
-				<div data-scrollss class="tab-section">
+				<div class="anchor" id="winning-nomination"></div>
+				<div data-scroll class="tab-section">
 						<p><span class="font-weight-bold">"Andrew Yang is polling at 2-3%. He can't possibly beat the front-runner and win the Democratic primary." Or could he?</span></p>
 						<p>Since 1950, <a href="https://news.gallup.com/poll/10120/history-shows-january-frontrunner-often-does-win-democratic-nomination.aspx">the January primary front-runner (according to national polling) has been more likely to lose the primary than to win it.</a></p>
 						<p>In primary history, there have been plenty of examples of an unlikely underdog winning the nomination. Let's take a look (Keep in mind, Andrew Yang is at 5th place in some DNC qualifying polls):</p>
@@ -165,6 +165,8 @@
 		e.className.replace(regex, "");
 	}
 
+	let replaceStateDebounce = 250;
+
 	let setTabAsActive = (tabs, tabSections, tabIndex) => {
 		tabs.forEach((tab, index) => {
 			if(index == tabIndex){
@@ -179,10 +181,14 @@
 			if(index == tabIndex){
 				tabSection.classList.add('active');
 				let hash = `#${window.scrollY < 50 ? '' : tabSection.previousElementSibling.id}`;
-				if(history.replaceState) {
-					history.replaceState(null, null, hash);
-				} else {
-					location.hash = hash;
+				if(replaceStateDebounce >= 0){
+					replaceStateDebounce = -replaceStateDebounce;
+					if(history.replaceState) {
+						history.replaceState(null, null, hash)
+					} else {
+						window.location.hash = hash;
+					}
+					setTimeout(() => { replaceStateDebounce = -replaceStateDebounce; }, -replaceStateDebounce);
 				}
 				addClass(tabSection, 'active');
 			} else {
@@ -198,16 +204,23 @@
 		/* tabs.forEach((tab, index)=>{
 			tab.onclick = () => {setTabAsActive(tabs, tabSections, index)};
 		}) */
+		let scrollDebounce = 250;
 		window.addEventListener("scroll", () => {
-			let lowestSectionIndex = 0;
-			tabSections.forEach( (tabSection, index) => {
-				if (window.scrollY + window.innerHeight/2 > tabSection.offsetTop) {
-					if( tabSection.offsetTop > tabSections[lowestSectionIndex].offsetTop) {
-						lowestSectionIndex = index;
+			if(scrollDebounce >= 0){
+				scrollDebounce = -scrollDebounce;
+
+				let lowestSectionIndex = 0;
+				tabSections.forEach( (tabSection, index) => {
+					if (window.scrollY + window.innerHeight/2 > tabSection.offsetTop) {
+						if( tabSection.offsetTop > tabSections[lowestSectionIndex].offsetTop) {
+							lowestSectionIndex = index;
+						}
 					}
-				}
-			});
-			setTabAsActive(tabs, tabSections, lowestSectionIndex);
+				});
+				setTabAsActive(tabs, tabSections, lowestSectionIndex);
+
+				setTimeout(()=>{scrollDebounce = -scrollDebounce;}, -scrollDebounce);
+			}
 		});
 	});
 
@@ -225,12 +238,14 @@
 			});
 			bigShareButtons = !bigShareButtons;
 		}
+		[...document.getElementsByClassName("anchor")].forEach(e=>e.style = `top: -${[...document.getElementsByClassName('sticky-top')].pop().offsetHeight + 5}px;`);
 	}
 	adjustShareButtonSize();
 	window.addEventListener("resize", () => {
 		clearTimeout(resizeTimeout);
 		setTimeout(adjustShareButtonSize, 250);
 	});
+	setTimeout(()=>{window.location.hash = window.location.hash}, 250);
 </script>
 <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@16.1/dist/smooth-scroll.polyfills.min.js"></script>
 <script>
