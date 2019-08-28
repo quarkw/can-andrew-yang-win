@@ -170,12 +170,12 @@ ul.tabs li a:hover {
 @media (hover: none) {
 	ul.tabs li a {
 		background-image: none !important;
-		text-decoration: underline;
+		text-decoration: underline !important;
 	}
 	ul.tabs li.active a {
 		background-image: linear-gradient(to top, #DA3248 0.75ex, hsla(0, 0%, 0%, 0) 0.75ex)!important;
-		background-position-y: -0.15ex;
-		text-decoration: none;
+		background-position-y: -0.15ex !important;
+		text-decoration: none !important;
 	}
  }
 
