@@ -251,7 +251,7 @@
 			});
 			bigShareButtons = !bigShareButtons;
 		}
-		[...document.getElementsByClassName("anchor")].forEach(e=>e.style = `top: -${[...document.getElementsByClassName('sticky-top')].pop().offsetHeight + 5}px;`);
+		[...document.getElementsByClassName("anchor")].forEach(e=>e.style = `top: -${[...document.getElementsByClassName('sticky-top')].pop().offsetHeight}px;`);
 	}
 	adjustShareButtonSize();
 	window.addEventListener("resize", () => {
