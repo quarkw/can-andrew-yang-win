@@ -166,6 +166,7 @@
 	}
 
 	let replaceStateDebounce = 250;
+	let replaceStateTimeout;
 
 	let setTabAsActive = (tabs, tabSections, tabIndex) => {
 		tabs.forEach((tab, index) => {
@@ -181,14 +182,20 @@
 			if(index == tabIndex){
 				tabSection.classList.add('active');
 				let hash = `#${window.scrollY < 50 ? '' : tabSection.previousElementSibling.id}`;
-				if(replaceStateDebounce >= 0){
-					replaceStateDebounce = -replaceStateDebounce;
+				let replaceState = (hash) => {
 					if(history.replaceState) {
 						history.replaceState(null, null, hash)
 					} else {
-						window.location.hash = hash;
+						window.location.hsash = hash;
 					}
+				}
+				if(replaceStateDebounce >= 0){
+					replaceStateDebounce = -replaceStateDebounce;
+					replaceState(hash);
 					setTimeout(() => { replaceStateDebounce = -replaceStateDebounce; }, -replaceStateDebounce);
+				} else {
+					clearTimeout(replaceStateTimeout);
+					replaceStateTimeout = setTimeout(() => {replaceState(hash)}, -replaceStateTimeout);
 				}
 				addClass(tabSection, 'active');
 			} else {
@@ -205,10 +212,9 @@
 			tab.onclick = () => {setTabAsActive(tabs, tabSections, index)};
 		}) */
 		let scrollDebounce = 250;
+		let scrollTimeout;
 		window.addEventListener("scroll", () => {
-			if(scrollDebounce >= 0){
-				scrollDebounce = -scrollDebounce;
-
+			let scrollFn = () => {
 				let lowestSectionIndex = 0;
 				tabSections.forEach( (tabSection, index) => {
 					if (window.scrollY + window.innerHeight/2 > tabSection.offsetTop) {
@@ -218,12 +224,19 @@
 					}
 				});
 				setTabAsActive(tabs, tabSections, lowestSectionIndex);
-
+			}
+			if(scrollDebounce >= 0){
+				scrollDebounce = -scrollDebounce;
+				scrollFn();
 				setTimeout(()=>{scrollDebounce = -scrollDebounce;}, -scrollDebounce);
+			} else {
+				clearTimeout(scrollTimeout);
+				scrollTimeout = setTimeout(scrollFn, -scrollDebounce);
 			}
 		});
 	});
 
+	let resizeDebounce = 250;
 	let resizeTimeout;
 	let bigShareButtons = true;
 	let adjustShareButtonSize = () => {
@@ -242,8 +255,14 @@
 	}
 	adjustShareButtonSize();
 	window.addEventListener("resize", () => {
-		clearTimeout(resizeTimeout);
-		setTimeout(adjustShareButtonSize, 250);
+		if(resizeDebounce >= 0){
+			resizeDebounce = -resizeDebounce;
+			adjustShareButtonSize();
+			setTimeout(()=>{ resizeDebounce = -resizeDebounce }, -resizeDebounce);
+		} else {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(adjustShareButtonSize, -resizeDebounce);
+		}
 	});
 	setTimeout(()=>{window.location.hash = window.location.hash}, 250);
 </script>
