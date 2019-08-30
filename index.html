@@ -186,7 +186,7 @@
 					if(window.location.hash !== hash && !hash.match(/^#?$/) && !window.location.hash.match(/^#?$/) ){
 						gtag('config', 'UA-145822646-1', {
 							'page_title' : hash,
-							'page_path': `/%${hash}`
+							'page_path': `/${hash}`
 						  });
 					}
 					if(history.replaceState) {
