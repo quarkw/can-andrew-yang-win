@@ -198,16 +198,20 @@
 				removeClass(tab, 'active');
 			}
 		});
+		let pageChangeTimeout;
 		tabSections.forEach((tabSection, index) => {
 			if(index == tabIndex){
 				tabSection.classList.add('active');
 				let hash = `#${window.scrollY < 50 ? '' : tabSection.previousElementSibling.id}`;
 				let replaceState = (hash) => {
 					if(window.location.hash !== hash && !hash.match(/^#?$/) && !window.location.hash.match(/^#?$/) ){
-						gtag('config', 'UA-145822646-1', {
+						clearTimeout(pageChangeTimeout);
+						pageChangeTimeout = setTimeout(() => {
+							gtag('config', 'UA-145822646-1', {
 							'page_title' : hash,
 							'page_path': `/${hash}`
-						  });
+							})
+						}, 1000);
 					}
 					if(history.replaceState) {
 						history.replaceState(null, null, hash)
