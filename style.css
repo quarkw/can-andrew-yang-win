@@ -388,3 +388,15 @@ background-color: #FF6600
 	position: relative;
 	top: -60px;
 }
+footer {
+	background: #13294B;
+	border-top: 1px solid white;
+}
+footer > a {
+	color: white;
+	text-decoration: underline;
+}
+footer > a:hover {
+	color: white;
+	text-decoration: none;
+}
